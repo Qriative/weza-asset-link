@@ -1,8 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Zap, Users } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-fintech.jpg";
 
 const Hero = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/auth');
+    }
+  };
+
   return (
     <section className="pt-20 pb-16 lg:pt-32 lg:pb-24 bg-gradient-hero">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,8 +38,8 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12">
-              <Button variant="hero" size="lg" className="group">
-                Apply for Credit
+              <Button variant="hero" size="lg" className="group" onClick={handleGetStarted}>
+                {user ? 'Go to Dashboard' : 'Apply for Credit'}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="outline" size="lg" className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">

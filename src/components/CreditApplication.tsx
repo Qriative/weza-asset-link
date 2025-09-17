@@ -1,6 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { 
   FileText, 
   CreditCard, 
@@ -68,6 +70,17 @@ const ProcessStep = ({
 );
 
 const CreditApplication = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleStartApplication = () => {
+    if (user) {
+      navigate('/dashboard');
+    } else {
+      navigate('/auth');
+    }
+  };
+
   const assetTypes = [
     {
       icon: Car,
@@ -172,8 +185,8 @@ const CreditApplication = () => {
                     <div className="text-sm text-primary-foreground/80">Processing</div>
                   </div>
                 </div>
-                <Button variant="accent" size="lg" className="w-full group">
-                  Start Your Application
+                <Button variant="accent" size="lg" className="w-full group" onClick={handleStartApplication}>
+                  {user ? 'Go to Dashboard' : 'Start Your Application'}
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <div className="text-sm text-primary-foreground/70">
