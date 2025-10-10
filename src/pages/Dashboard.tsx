@@ -219,7 +219,10 @@ const Dashboard = () => {
 
         {/* Quick Actions */}
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <Card className="group hover:shadow-medium transition-all duration-300 cursor-pointer">
+          <Card 
+            className="group hover:shadow-medium transition-all duration-300 cursor-pointer"
+            onClick={() => window.location.href = '/apply'}
+          >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -269,7 +272,7 @@ const Dashboard = () => {
                 <p className="text-muted-foreground mb-4">
                   Start your journey by applying for asset credit
                 </p>
-                <Button>
+                <Button onClick={() => window.location.href = '/apply'}>
                   <Plus className="w-4 h-4 mr-2" />
                   Create Application
                 </Button>
